@@ -150,6 +150,7 @@ doctrine:
                 st_within: CrEOF\Spatial\ORM\Query\AST\Functions\MySql\STWithin
                 point: CrEOF\Spatial\ORM\Query\AST\Functions\MySql\Point
             string_functions:
+                date: DoctrineExtensions\Query\Mysql\Date
                 json_contains: AppBundle\Query\Mysql\JsonContains
                 find_in_set: DoctrineExtensions\Query\Mysql\FindInSet
                 json_length: Syslogic\DoctrineJsonFunctions\Query\AST\Functions\Mysql\JsonLength
