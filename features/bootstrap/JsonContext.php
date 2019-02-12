@@ -23,9 +23,7 @@ class JsonContext extends BehatchJsonContext
 
     public function theJsonNodeShouldContain($node, $text)
     {
-        $json = $this->getJson();
-
-        $actual = $this->inspector->evaluate($json, $node);
+        $actual = $this->inspector->evaluate($this->getJson(), $node);
 
         $this->assertContains(
             $text,
