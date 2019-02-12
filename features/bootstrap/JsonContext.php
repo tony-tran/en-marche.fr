@@ -14,9 +14,27 @@ class JsonContext extends BehatchJsonContext
 
     public function assertJson(string $expected, string $actual): void
     {
-        // Remove all useless whitespaces
         $expected = preg_replace('/\s(?=([^"]*"[^"]*")*[^"]*$)/', '', $expected);
 
+        if (!PHPMatcher::match($actual, $expected, $error)) {
+            throw new ExpectationException($error, $this->getSession());
+        }
+    }
+
+    public function theJsonNodeShouldContain($node, $text)
+    {
+        $json = $this->getJson();
+
+        $actual = $this->inspector->evaluate($json, $node);
+
+        $this->assertContains(
+            $text,
+            \is_bool($actual) ? json_encode($actual) : (string) $actual
+        );
+    }
+
+    protected function assertContains($expected, $actual, $message = null)
+    {
         if (!PHPMatcher::match($actual, $expected, $error)) {
             throw new ExpectationException($error, $this->getSession());
         }
